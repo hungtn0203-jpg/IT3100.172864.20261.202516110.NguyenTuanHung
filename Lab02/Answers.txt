@@ -1,0 +1,17 @@
+﻿Question 1: What happens if the user chooses "Cancel"?
+Answer: Nếu người dùng bấm "Cancel" (hoặc đóng hộp thoại), phương thức JOptionPane.showConfirmDialog sẽ trả về giá trị -2 (tương ứng với JOptionPane.CLOSED_OPTION) hoặc 1 (tùy theo ngữ cảnh của JOptionPane.NO_OPTION, hoặc cụ thể là -1 / CLOSED_OPTION khi bấm nút 'X' để tắt). Trong cấu trúc mã nguồn cụ thể này, vì điều kiện chỉ kiểm tra nếu option == JOptionPane.YES_OPTION, việc bấm "Cancel" sẽ bỏ qua khối lệnh 'if', bỏ qua hộp thoại lựa chọn thứ hai, và thực thi ngay lập tức lệnh System.exit(0) để kết thúc chương trình.
+
+Question 2: How would you customize the options given to the user, e.g., only two options: "Yes" and "No", OR "I do" and "I don't"?
+Answer: Để tùy chỉnh các lựa chọn hiển thị cho người dùng, chúng ta có thể sử dụng một mảng các chuỗi chứa các tùy chọn mong muốn và truyền nó vào phương thức showOptionDialog thay vì dùng showConfirmDialog.
+Đoạn mã ví dụ cho các lựa chọn tùy chỉnh ("I do" và "I don't"):
+    String[] options = {"I do", "I don't"};
+    int option = JOptionPane.showOptionDialog(
+        null,
+        "Do you want to change to the first class ticket?",
+        "Select an option",
+        JOptionPane.YES_NO_OPTION,
+        JOptionPane.QUESTION_MESSAGE,
+        null,
+        options,
+        options[0]
+    );
