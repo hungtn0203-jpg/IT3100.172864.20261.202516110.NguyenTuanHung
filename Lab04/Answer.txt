@@ -1,0 +1,15 @@
+Question 5: Giả sử bạn viết một hàm khởi tạo (constructor) tạo DVD từ tiêu đề (title), và một hàm khởi tạo khác tạo DVD từ thể loại (category). Java có cho phép điều này không? Tại sao?
+
+Answer: Không, Java không cho phép điều này. Nạp chồng phương thức (Method overloading) yêu cầu các constructor/phương thức phải có danh sách tham số khác nhau (về số lượng, kiểu dữ liệu hoặc thứ tự). Hàm khởi tạo theo title và hàm khởi tạo theo category đều có cùng một chữ ký phương thức (signature) là "DigitalVideoDisc(String)", do đó trình biên dịch Java không thể phân biệt được.
+
+Question 9: So sánh phiên bản sử dụng tham số biến đổi (varargs) và phiên bản sử dụng mảng (array). Bạn ưu tiên phương án nào hơn trong trường hợp này và tại sao?
+
+Answer: Cả hai phiên bản varargs (DigitalVideoDisc...) và mảng (DigitalVideoDisc[]) đều cho phép truyền vào nhiều đối tượng DVD. Tuy nhiên, varargs linh hoạt hơn vì nó chấp nhận cả một mảng lẫn danh sách các tham số phân tách bằng dấu phẩy trực tiếp khi gọi hàm. Phiên bản mảng bắt buộc người gọi phải khởi tạo một mảng trước. Do đó, em ưu tiên phiên bản varargs hơn vì cú pháp gọn gàng và tiện lợi hơn.
+
+Question 10.1: Sau khi gọi hàm swap(jungleDVD, cinderellaDVD), tại sao tiêu đề của hai đối tượng này vẫn giữ nguyên?
+
+Answer: Vì Java hoạt động theo cơ chế "truyền theo giá trị" (pass-by-value). Khi truyền đối tượng vào hàm swap, Java tạo ra một bản sao của tham chiếu (copy of reference) chứ không truyền chính tham chiếu gốc hay đối tượng. Hàm swap chỉ hoán đổi giá trị của các biến bản sao cục bộ (o1 và o2), do đó các biến tham chiếu gốc trong hàm main (jungleDVD và cinderellaDVD) hoàn toàn không bị thay đổi.
+
+Question 10.2: Sau khi gọi hàm changeTitle(jungleDVD, cinderellaDVD.getTitle()), tại sao tiêu đề của jungleDVD lại bị thay đổi?
+
+Answer: Mặc dù Java truyền tham chiếu theo giá trị, bản sao tham chiếu trong hàm changeTitle vẫn trỏ đến cùng một đối tượng trên bộ nhớ Heap. Khi gọi "dvd.setTitle(title)", nó truy cập và sửa đổi trực tiếp thuộc tính bên trong đối tượng đó. Dòng lệnh sau đó "dvd = new DigitalVideoDisc(oldTitle)" chỉ trỏ biến cục bộ "dvd" sang một đối tượng mới chứ không làm mất đi thay đổi đã thực hiện trước đó trên đối tượng gốc.
